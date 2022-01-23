@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDSC UNI</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png"/>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <img src="./images/logo.jpg" alt="logo" class="logo"><span>GDSC UNI</span>
+            <nav>
+                <ul id="menuList">
+                    <li><a href="">CodeLab</a></li>
+                    <li><a href="">Nosotros</a></li>
+                    <li><a href="">Blog</a></li>
+                    <li><a href="">Otros</a></li>
+                </ul>
+            </nav>
+            <img src="./images/menu.png" alt="menu-icon" class="menu-icon" onclick="togglemenu('')">
+        </div>
+
+        <div class="separte">
+            <div class="inge">
+                <div class="center">
+                    <div class="form-input">
+                      <label for="file-ip-1">Subir Foto Fachera</label>
+                      <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
+                    </div>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="fname" name="firstname" placeholder="Escribe tu nombre..." autocomplete="off">
+                    <input type="submit" id="submit" value="Insertar">
+                </div>
+                <br>
+                <div class="col-75">
+                    <input type="button" id="generate" value="Generar Obsequio" >
+                </div>
+            </div>
+    
+            <div class="row" id="gdscuni" style="padding: 30px;">
+                <div class="col-1">
+                    <h2>Bienvenido a<br>GDSC UNI</h2>
+                    <h3 id="nameinput"></h3>
+                    <p>No hay límites para lo que podemos construir.</p>
+                    <p>No hay límites para lo que podemos transformar.</p>
+                    <h4>#TenemosPasión</h4>
+                    <button type="button">GDSC UNI<img src="./images/arrow.png" alt=""> </button>
+                </div>
+                <div class="col-2">
+                    <div  class="controller">
+                        <img id="file-ip-1-preview">
+                    </div>
+                    <div class="color-box"></div>
+                    <div class="add-btn">
+                        <img src="./images/logo.jpg" alt="Logo" >
+                        <p><small>GDSC UNI</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="html2canvas.min.js"></script>
+
+    <script>
+
+        let place = document.querySelector("#fname");
+
+        let inputSubmit = document.querySelector("#submit");
+
+        let nameinput = document.querySelector("#nameinput");
+
+        inputSubmit.addEventListener("click", () => {
+            nameinput.textContent = place.value;
+        });
+
+        
+
+        let menulist = document.getElementById("menuList");
+
+        let margintop = document.querySelector(".separte")
+
+        menuList.style.maxHeight = "0px";
+
+        function togglemenu() {
+            if(menulist.style.maxHeight == "0px"){
+                menulist.style.maxHeight = "130px";
+                margintop.style.marginTop = "130px";
+                margintop.style.transition = "0.5s";
+            } else {
+                menulist.style.maxHeight = "0px";
+                margintop.style.marginTop = "0px";
+                margintop.style.transition = "0.5s";
+            }
+        }
+
+        function showPreview(event){
+            if(event.target.files.length > 0){
+                let src = URL.createObjectURL(event.target.files[0]);
+                let preview = document.getElementById("file-ip-1-preview");
+                preview.src = src;
+                preview.style.display = "block";
+            }
+        }
+
+        document.getElementById("generate").addEventListener("click", function() {
+            html2canvas(document.getElementById("gdscuni")).then(function (canvas) {		
+                	let anchorTag = document.createElement("a");
+                    document.body.appendChild(anchorTag);
+                    anchorTag.download = "miembrogdscuni.jpg";
+                    anchorTag.href = canvas.toDataURL();
+                    anchorTag.target = '_blank';
+                    anchorTag.click();
+                });
+        });
+    </script>
+
+</body>
+</html>
